@@ -3,19 +3,19 @@ const bcrypt = require("bcryptjs");
 
 const userSchema = mongoose.Schema({
     firstname:{
-        requiret: [true, "Firstname is Required"],
+        required: [true, "Firstname is Required"],
         type: String,
     },
     lastname:{
-        requiret: [true, "Lastname is Required"],
+        required: [true, "Lastname is Required"],
         type: String,
     },
     email:{
-        requiret: [true, "Email is Required"],
+        required: [true, "Email is Required"],
         type: String,
     },
     password:{
-        requiret: [true, "Password is Required"],
+        required: [true, "Password is Required"],
         type: String,
     },
     isAdmin:{
@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
 
 //Hash Password
 
-userSchema.pre("save", async function(next){
+userSchema.pre("save", async function (next) {
 if(!this.isModified("password")){
     next();
 }
