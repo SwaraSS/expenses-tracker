@@ -3,13 +3,13 @@ const Income = require("../../model/Income");
 
 
 const createIncCtrl = expressAsyncHandler(async (req, res) =>{
-    const { title, amount, description, user} = req.body;
+    const { title, amount, description} = req.body;
     try {
         const income = await Income.create({
             title, 
             amount, 
             description,
-            user,
+            user: req?.user?._id,
         });
         res.json(income);
     } catch (error) {
@@ -19,7 +19,7 @@ const createIncCtrl = expressAsyncHandler(async (req, res) =>{
 
 //fetch all income
 const fetchAllIncCtrl = expressAsyncHandler(async (req, res) =>{
-    console.log(req?.user);
+   // console.log(req?.user);
     const {page} = req.query;
     try {
         const income = await Income.paginate({}, {limit:10, page: Number(page), populate: "user" });

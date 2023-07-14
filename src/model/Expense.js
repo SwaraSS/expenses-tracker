@@ -25,7 +25,7 @@ const expenseSchema = mongoose.Schema({
         required: [true, "User ID is Required"],
     },
 },{
-    timestamp: true,
+    timestamps: true,
     toJson:{
         virtuals: true,
     },

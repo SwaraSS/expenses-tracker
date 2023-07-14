@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema({
         default: false,
     },
 },{
-    timestamp: true,
+    timestamps: true,
 });
 
 //Hash Password

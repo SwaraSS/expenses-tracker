@@ -3,13 +3,15 @@ const Expense = require("../../model/Expense");
 
 
 const createExpCtrl = expressAsyncHandler(async (req, res) =>{
-    const { title, amount, description, user} = req.body;
+    console.log(req.user);
+    const { title, amount, description} = req.body;
     try {
         const expense = await Expense.create({
             title, 
             amount, 
             description,
-            user,
+            user: req?.user?._id,
+            //createdAt: new Date(),
         });
         res.json(expense);
     } catch (error) {
