@@ -6,7 +6,9 @@ const userRoute = require('./routes/user/usersRoute');
 const { errorHandler, notFound } = require('./middlewares/errorMiddleware');
 const incomeRoute = require('./routes/income/incomeRoutes');
 const expenseRoute = require('./routes/expenses/expenseRoute');
+const accountStatsRoute = require('./routes/accountStatusRoute/accountStatusRoute');
 const app = express();
+
 
 dotenv.config();
 
@@ -23,6 +25,9 @@ app.get("/",(req, res) => {
 
 //users routes
 app.use("/api/users", userRoute);
+
+//account status routes
+app.use("/api/accountStats", accountStatsRoute);
 
 //income routes
 app.use("/api/income", incomeRoute);
