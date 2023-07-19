@@ -52,6 +52,37 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
 
 });
 
-  
+//User profile
 
-module.exports = {registerUser, fetchUsersCtrl, loginUserCtrl};
+const userProfileCtrl = expressAsyncHandler(async (req, res) => {
+   // const { _id } = req?.user;
+  
+    try {
+      const myProfile = await User.findById(req?.user?._id).populate(["expenses", "income"]);
+  
+      res.json(myProfile);
+    } catch (error) {
+      res.json(error);
+    }
+  });
+
+  //Update profile
+const updateUserCtrl = expressAsyncHandler(async (req, res) => {
+    //const { _id } = req?.user;
+    //validateMongodbId(_id);
+    const user = await User.findByIdAndUpdate(
+      req?.user?._id,
+      {
+        firstname: req?.body?.firstname,
+        lastname: req?.body?.lastname,
+        email: req?.body?.email,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    res.json(user);
+  });
+
+module.exports = {registerUser, fetchUsersCtrl, loginUserCtrl, userProfileCtrl, updateUserCtrl};

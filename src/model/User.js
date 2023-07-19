@@ -22,9 +22,33 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-},{
+},
+{
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
     timestamps: true,
-});
+  }
+);
+
+//virtual
+userSchema.virtual("expenses", {
+    ref: "Expense",
+    foreignField: "user",
+    localField: "_id",
+  });
+  
+  //virtual method to populate created post
+  userSchema.virtual("income", {
+    ref: "Income",
+    foreignField: "user",
+    localField: "_id",
+  });
+
+
 
 //Hash Password
 
